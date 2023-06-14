@@ -2,26 +2,12 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const MainMenu = ({ navigation }) => {
-  const handleTimerButtonPress = () => {
-    navigation.navigate('Timer');
-    console.log('Timer button pressed');
-  };
+const Task = ({ navigation }) => {
 
-  const handleSetUpTaskButtonPress = () => {
-    navigation.navigate('Task');
-    console.log('Set Up a Task button pressed');
-  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity  onPress={handleTimerButtonPress}>
-        <Image source={require('../../assets/Tomato-simple.png')} />
-      </TouchableOpacity>
 
-      <TouchableOpacity  onPress={handleSetUpTaskButtonPress}>
-        <Image source={require('../../assets/Tomato-task-b.png')} />
-      </TouchableOpacity>
     </View>
   );
 };
@@ -55,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainMenu;
+export default Task;
