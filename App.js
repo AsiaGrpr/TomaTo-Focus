@@ -5,11 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './src/screens/HomeScreen';
-import LoginScreen from './src/components/LoginScreen';
-import SignUpScreen from './src/components/SignUpScreen';
-import MainMenu from './src/components/MainMenu';
 import Timer from './src/components/Timer'
-import Task from './src/components/Task';
+import Task from './src/components/Tasks';
 
 const Stack = createStackNavigator();
 
@@ -18,11 +15,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen name="MainMenu" component={MainMenu} options={{ headerShown: false }} />
-        <Stack.Screen name="Timer" component={Timer} />
-        <Stack.Screen name="Task" component={Task} />
+        <Stack.Screen name="Timer" component={Timer} options={{ headerShown: false }}/>
+        <Stack.Screen name="Task" component={Task} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
