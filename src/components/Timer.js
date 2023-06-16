@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Slider from '@react-native-community/slider';
-import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Modal, Image } from 'react-native';
 import { Svg, Circle, G, Text as SvgText, Path } from 'react-native-svg';
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 const Timer = () => {
@@ -101,59 +103,11 @@ const Timer = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.labelContainer}>
-        <Text style={styles.timerLabel}>{isWorkTime ? 'Work Time' : 'Break Time'}</Text>
-      </View>
-      <Svg width="200" height="200" style={styles.timerContainer}>
-        <Circle
-          cx="100"
-          cy="100"
-          r="90"
-          fill="transparent"
-          stroke={isWorkTime ? '#de463f' : '#00bf63'}
-          strokeWidth="12"
-        />
-        <Path
-          d="M100 10 A 90 90 0 1 0 100 190"
-          fill="transparent"
-          stroke='#ddd'
-          strokeWidth="13"
-          strokeDasharray="565.48"
-          strokeDashoffset={calculateProgress() * 5.6548}
-        />
-        <G transform={{ translate: '100, 100' }}>
-          <SvgText
-            x="0"
-            y="0"
-            fill="#000"
-            fontSize="48"
-            fontWeight="bold"
-            textAnchor="middle"
-            alignmentBaseline="middle"
-          >
-            {formatTime(remainingTime)}
-          </SvgText>
-        </G>
-      </Svg>
       <TouchableOpacity
-        style={[styles.button, { backgroundColor: isWorkTime ? '#de463f' : '#00bf63' }]}
-        onPress={isPlaying ? handlePauseTimer : handleStartTimer}
-      >
-        <Text style={styles.buttonText}>{isPlaying ? 'Pause' : 'Start'}</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: isWorkTime ? '#de463f' : '#00bf63' }]}
-        onPress={handleResetTimer}
-      >
-        <Text style={styles.buttonText}>Reset</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: '#999' }]}
+        style={styles.circularButton}
         onPress={handleSettingsPress}
       >
-        <Text style={styles.buttonText}>Settings</Text>
+        <AntDesign name="setting" size={45} color="white" />
       </TouchableOpacity>
 
       <Modal visible={isSettingsModalVisible} animationType="slide" transparent={true}>
@@ -170,8 +124,8 @@ const Timer = () => {
                 step={1}
                 value={workDuration / 60}
                 onValueChange={value => handleWorkDurationChange(value * 60)}
-                minimumTrackTintColor={isWorkTime ? '#de463f' : '#00bf63'}
-                thumbTintColor={isWorkTime ? '#de463f' : '#00bf63'}
+                minimumTrackTintColor={isWorkTime ? '#eb6956' : '#00bf63'}
+                thumbTintColor={isWorkTime ? '#eb6956' : '#00bf63'}
               />
             </View>
 
@@ -184,8 +138,8 @@ const Timer = () => {
                 step={1}
                 value={breakDuration / 60}
                 onValueChange={value => handleBreakDurationChange(value * 60)}
-                minimumTrackTintColor={isWorkTime ? '#de463f' : '#00bf63'}
-                thumbTintColor={isWorkTime ? '#de463f' : '#00bf63'}
+                minimumTrackTintColor={isWorkTime ? '#eb6956' : '#00bf63'}
+                thumbTintColor={isWorkTime ? '#eb6956' : '#00bf63'}
               />
             </View>
 
@@ -198,17 +152,70 @@ const Timer = () => {
                 step={1}
                 value={sessionCount}
                 onValueChange={value => handleSessionCountChange(value)}
-                minimumTrackTintColor={isWorkTime ? '#de463f' : '#00bf63'}
-                thumbTintColor={isWorkTime ? '#de463f' : '#00bf63'}
+                minimumTrackTintColor={isWorkTime ? '#eb6956' : '#00bf63'}
+                thumbTintColor={isWorkTime ? '#eb6956' : '#00bf63'}
               />
             </View>
-
-            <TouchableOpacity style={styles.closeButton} onPress={handleSettingsClose}>
-              <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={handleSettingsClose}
+              >
+                <AntDesign name="closecircleo" size={24} color="white" />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
+
+      <Svg width="200" height="200" style={styles.timerContainer}>
+        <Circle
+          cx="100"
+          cy="100"
+          r="90"
+          fill="transparent"
+          stroke="#ddd"
+          strokeWidth="12"
+        />
+        <Circle
+          cx="100"
+          cy="100"
+          r="90"
+          fill="transparent"
+          stroke={isWorkTime ? '#eb6956' : '#00bf63'}
+
+          strokeWidth="13"
+          strokeDasharray="565.48"
+          strokeDashoffset={565.48 - calculateProgress() * 5.6548}
+          transform="rotate(-90 100 100)"
+        />
+      </Svg>
+      <TouchableOpacity
+        style={styles.playPauseButton}
+        onPress={isPlaying ? handlePauseTimer : handleStartTimer}
+      >
+        <View style={styles.buttonContainer}>
+          {isPlaying ? (
+            <Image source={require('../../assets/tomato-pause.png')} style={styles.buttonImage} />
+          ) : (
+            <Image source={require('../../assets/tomato-play.png')} style={styles.buttonImage} />
+          )}
+        </View>
+      </TouchableOpacity>
+      
+      <View style={styles.labelContainer}>
+        <Text style={styles.timerLabel}>{isWorkTime ? 'Work Time' : 'Break Time'}</Text>
+      </View>
+      <View style={styles.labelContainer}>
+        <Text style={styles.timerLabel}>{formatTime(remainingTime)}</Text>
+      </View>
+
+      <TouchableOpacity
+        style={styles.resetButton}
+        onPress={handleResetTimer}
+      >
+        <MaterialIcons name="loop" size={45} color="white" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -220,22 +227,64 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   labelContainer: {
+    position: 'absolute',
+    top: 40,
     alignItems: 'center',
     marginBottom: 10,
-  },
-  timerContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
   },
   timerLabel: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: 'grey'
   },
+
+  timerContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
   playPauseButton: {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: -24 }, { translateY: -24 }],
+    width: 61,
+    height: 61,
+    borderRadius: 30,
+    backgroundColor: '#ddd',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  resetButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey',
+    elevation: 5,
+  },
+  circularButton: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey',
+    elevation: 5,
+  },
+  closeButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey',
+    elevation: 5,
   },
   button: {
     paddingHorizontal: 20,
@@ -249,15 +298,15 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center'
   },
   modalContent: {
+    flex: 0.5,
+    margin: 20,
+    borderRadius: 10,
     backgroundColor: 'white',
     padding: 20,
-    borderRadius: 10,
-    width: '80%',
   },
   modalTitle: {
     fontSize: 18,
@@ -275,17 +324,10 @@ const styles = StyleSheet.create({
   slider: {
     width: '100%',
   },
-  closeButton: {
-    backgroundColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
-  },
-  closeButtonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'white',
   },
 });
 
