@@ -243,6 +243,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ffffff',
   },
   addButtonContainer: {
     position: 'absolute',
@@ -278,7 +279,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'grey',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
@@ -325,7 +326,7 @@ const styles = StyleSheet.create({
   },
   noteContainer: {
     margin: 5,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderRadius: 5,
     padding: 10,
     elevation: 3,
