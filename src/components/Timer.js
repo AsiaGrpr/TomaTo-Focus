@@ -182,7 +182,7 @@ const Timer = () => {
           cy="100"
           r="90"
           fill="transparent"
-          stroke={isWorkTime ? '#eb6956' : '#00bf63'}
+          stroke={isWorkTime ? '#E60012' : '#00bf63'}
 
           strokeWidth="13"
           strokeDasharray="565.48"
@@ -202,13 +202,14 @@ const Timer = () => {
           )}
         </View>
       </TouchableOpacity>
-      
-      <View style={styles.labelContainer}>
-        <Text style={styles.timerLabel}>{isWorkTime ? 'Work Time' : 'Break Time'}</Text>
-      </View>
       <View style={styles.labelContainer}>
         <Text style={styles.timerLabel}>{formatTime(remainingTime)}</Text>
       </View>
+
+      <View style={styles.periodContainer}>
+        <Text style={styles.periodLabel}>{isWorkTime ? 'Work Time' : 'Break Time'}</Text>
+      </View>
+
 
       <TouchableOpacity
         style={styles.resetButton}
@@ -225,17 +226,31 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffffff',
   },
   labelContainer: {
+    position: 'absolute',
+    bottom: 250,
+    alignItems: 'center',
+    marginBottom: 10,
+    justifyContent: 'center'
+  },
+  timerLabel: {
+
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#ddd'
+  },
+  periodContainer: {
     position: 'absolute',
     top: 40,
     alignItems: 'center',
     marginBottom: 10,
   },
-  timerLabel: {
+  periodLabel: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'grey'
+    color: 'black'
   },
 
   timerContainer: {
