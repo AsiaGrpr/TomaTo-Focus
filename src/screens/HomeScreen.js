@@ -15,11 +15,15 @@ const MainMenu = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity  onPress={handleTimerButtonPress}>
+      <TouchableOpacity
+        style={styles.images}
+        onPress={handleTimerButtonPress}>
         <Image source={require('../../assets/Tomato-simple.png')} />
       </TouchableOpacity>
 
-      <TouchableOpacity  onPress={handleSetUpTaskButtonPress}>
+      <TouchableOpacity
+        style={styles.images}
+        onPress={handleSetUpTaskButtonPress}>
         <Image source={require('../../assets/Tomato-task-b.png')} />
       </TouchableOpacity>
     </View>
@@ -27,31 +31,15 @@ const MainMenu = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
-    justifyContent: 'center',
+    padding: 20,
     alignItems: 'center',
+    justifyContent: 'flex-end',
   },
-  button: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  Text: {
-    color: 'black',
-    fontSize: 10,
-    fontWeight: 'bold',
-    alignItems: 'center',
-    marginBottom: 1,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
+  images:{
+    alignSelf: 'center'
   },
 });
 
