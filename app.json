@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "toma-to-focus",
+    "slug": "toma-to-focus",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/Tomato-simple.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/logo-title-circular.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/Tomato-simple.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/Tomato-simple.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2be1a6fa-dba8-43d0-9056-85fb469d67d4"
+      }
+    },
+    "owner": "asiagrpr"
+  }
+}
