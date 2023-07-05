@@ -7,18 +7,20 @@ import { Octicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
 const Tasks = () => {
-  const [notes, setNotes] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [noteTitle, setNoteTitle] = useState('');
-  const [noteText, setNoteText] = useState('');
-  const [isTaskList, setIsTaskList] = useState(false);
-  const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
+  const [notes, setNotes] = useState([]); // Stores the list of notes
+  const [modalVisible, setModalVisible] = useState(false); // Controls the visibility of the modal
+  const [noteTitle, setNoteTitle] = useState(''); // Stores the title of the note
+  const [noteText, setNoteText] = useState(''); // Stores the text content of the note
+  const [isTaskList, setIsTaskList] = useState(false); // Indicates whether the note is a task list or a regular note
+  const [selectedNoteIndex, setSelectedNoteIndex] = useState(null); // Keeps track of the index of the selected note
 
   useEffect(() => {
     retrieveNotes();
   }, []);
 
   const retrieveNotes = async () => {
+    // Retrieves the saved notes from AsyncStorage
+
     try {
       const savedNotes = await AsyncStorage.getItem('notes');
       if (savedNotes !== null) {
@@ -30,6 +32,8 @@ const Tasks = () => {
   };
 
   const saveNotes = async (notes) => {
+    // Saves the notes to AsyncStorage
+
     try {
       await AsyncStorage.setItem('notes', JSON.stringify(notes));
     } catch (error) {
@@ -38,6 +42,8 @@ const Tasks = () => {
   };
 
   const openModal = (index) => {
+    // Opens the modal for adding/editing a note
+
     setSelectedNoteIndex(index);
     setNoteTitle(index !== null ? notes[index].title : '');
     setNoteText(index !== null ? notes[index].text : '');
@@ -46,6 +52,8 @@ const Tasks = () => {
   };
 
   const closeModal = () => {
+    // Closes the modal and resets the state variables
+
     setSelectedNoteIndex(null);
     setNoteTitle('');
     setNoteText('');
@@ -54,6 +62,8 @@ const Tasks = () => {
   };
 
   const addNote = () => {
+    // Adds a new note or updates an existing note
+
     if (noteTitle.trim() !== '' || noteText.trim() !== '') {
       const newNote = {
         title: noteTitle,
@@ -72,6 +82,8 @@ const Tasks = () => {
   };
 
   const deleteNote = (index) => {
+    // Deletes a note
+
     const updatedNotes = [...notes];
     updatedNotes.splice(index, 1);
     setNotes(updatedNotes);
@@ -79,6 +91,8 @@ const Tasks = () => {
   };
 
   const toggleTask = (index) => {
+    // Toggles the completion status of a task in a task list
+
     setNotes(prevNotes => {
       const newNotes = [...prevNotes];
       const currentNote = newNotes[index];
@@ -95,6 +109,8 @@ const Tasks = () => {
   };
 
   const renderNote = ({ item, index }) => {
+    // Renders a single note item
+
     const toggleTask = (taskIndex) => {
       setNotes(prevNotes => {
         const newNotes = [...prevNotes];
@@ -120,31 +136,42 @@ const Tasks = () => {
         style={styles.noteContainer}
       >
         <View style={styles.noteOptionsContainer}>
+
+          /* Button to open the options modal for the note */
           <TouchableOpacity
             style={styles.noteOptionsButton}
             onPress={() => openModal(index)}
           >
             <Entypo name="dots-three-horizontal" size={20} color="black" />
           </TouchableOpacity>
-
         </View>
+
+        /* Render note title if it is not empty */
         {item.title !== '' && <Text style={styles.noteTitle}>{item.title}</Text>}
+
+        /* Render task list if it is a task list note */
         {item.isTaskList && item.text ? (
           <SafeAreaView style={styles.taskListContainer}>
             <FlatList
               data={item.text.split('\n')}
               renderItem={({ item: task, index: taskIndex }) => (
                 <View style={styles.taskListItem}>
+
+                  /* Checkbox button to toggle task completion */
                   <TouchableOpacity
                     onPress={() => toggleTask(taskIndex)}
                     style={styles.checkBoxButton}
                   >
+
+                    /* Render different checkbox icon based on task completion */
                     {task.startsWith('☑') ? (
                       <MaterialIcons name="check-box" size={24} color="black" />
                     ) : (
                       <MaterialIcons name="check-box-outline-blank" size={24} color="black" />
                     )}
                   </TouchableOpacity>
+
+                  /* Render task text */
                   <Text style={styles.taskText}>{task.replace('☑ ', '')}</Text>
                 </View>
               )}
@@ -152,6 +179,8 @@ const Tasks = () => {
             />
           </SafeAreaView>
         ) : (
+
+          /* Render regular note text */
           <Text style={styles.noteText}>{item.text}</Text>
         )}
       </TouchableOpacity>
@@ -159,12 +188,18 @@ const Tasks = () => {
   };
 
   useEffect(() => {
+    // Filter out notes with empty titles or texts
+
     const nonEmptyNotes = notes.filter(note => note.title.trim() !== '' || note.text.trim() !== '');
+
+    // Save the non-empty notes
     saveNotes(nonEmptyNotes);
   }, [notes]);
 
   return (
     <View style={styles.container}>
+
+      /* Render the list of notes */
       <SafeAreaView style={styles.notesContainer}>
         <FlatList
           data={notes}
@@ -172,6 +207,8 @@ const Tasks = () => {
           keyExtractor={(item, index) => index.toString()}
         />
       </SafeAreaView>
+
+      /* Modal for adding/editing notes */
       <Modal
         animationType="slide"
         transparent={true}
@@ -181,6 +218,8 @@ const Tasks = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.buttonContainer}>
+
+              /* Delete button (visible if a note is selected) */
               {selectedNoteIndex !== null && (
                 <TouchableOpacity
                   style={styles.deleteButton}
@@ -191,6 +230,8 @@ const Tasks = () => {
               )}
             </View>
             <View style={styles.inputContainer}>
+
+              /* Input for note title */
               <TextInput
                 style={styles.input}
                 placeholder="Title"
@@ -198,6 +239,8 @@ const Tasks = () => {
                 value={noteTitle}
                 autoFocus={true}
               />
+
+              /* Input for note text (supports multiline) */
               <TextInput
                 style={[styles.input, styles.noteTextInput]}
                 placeholder={isTaskList ? "Enter tasks (one per line)" : "Write your note"}
@@ -207,6 +250,8 @@ const Tasks = () => {
               />
             </View>
             <View style={styles.buttonContainer}>
+
+              /* Toggle between regular note and task list */
               <TouchableOpacity
                 style={styles.optionButton}
                 onPress={() => setIsTaskList(!isTaskList)}
@@ -217,6 +262,8 @@ const Tasks = () => {
                   <Octicons name="tasklist" size={24} color="black" />
                 )}
               </TouchableOpacity>
+
+              /* Confirm button to add/edit the note */
               <TouchableOpacity
                 style={styles.confirmButton}
                 onPress={() => addNote()}
@@ -227,6 +274,8 @@ const Tasks = () => {
           </View>
         </View>
       </Modal>
+
+      /* Button to open the modal for adding/editing a note */
       <TouchableOpacity
         style={styles.addButtonContainer}
         onPress={() => openModal(null)}

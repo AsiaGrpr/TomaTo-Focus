@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/Tomato-simple.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.asiagrpr.tomatofocus"
     },
     "web": {
       "favicon": "./assets/Tomato-simple.png"
