@@ -7,22 +7,26 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 
 const Timer = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [remainingTime, setRemainingTime] = useState(0);
-  const [isWorkTime, setIsWorkTime] = useState(true);
-  const [workDuration, setWorkDuration] = useState(25 * 60);
-  const [breakDuration, setBreakDuration] = useState(5 * 60);
-  const [sessionCount, setSessionCount] = useState(4);
-  const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false);
+// Define state variables to manage the timer and settings
+const [isPlaying, setIsPlaying] = useState(false); // Indicates whether the timer is currently running or paused
+const [remainingTime, setRemainingTime] = useState(0); // Tracks the remaining time in seconds
+const [isWorkTime, setIsWorkTime] = useState(true); // Indicates whether it is currently work time or break time
+const [workDuration, setWorkDuration] = useState(25 * 60); // Duration of a work session in seconds (default: 25 minutes)
+const [breakDuration, setBreakDuration] = useState(5 * 60); // Duration of a break session in seconds (default: 5 minutes)
+const [sessionCount, setSessionCount] = useState(4); // Number of work sessions before a long break (default: 4)
+const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false); // Indicates whether the settings modal is visible or not
 
-  useEffect(() => {
-    setRemainingTime(workDuration);
-  }, []);
+// Set the initial remaining time to the work duration when the component mounts
+useEffect(() => {
+  setRemainingTime(workDuration);
+}, []);
 
   useEffect(() => {
     let timerInterval;
 
     if (isPlaying && remainingTime > 0) {
+      // Decrease remaining time every second
+
       timerInterval = setInterval(() => {
         setRemainingTime(prevTime => prevTime - 1);
       }, 1000);
@@ -35,37 +39,55 @@ const Timer = () => {
   }, [isPlaying, remainingTime]);
 
   const handleStartTimer = () => {
+    // Start the timer
+
     setIsPlaying(true);
   };
 
   const handlePauseTimer = () => {
+    // Pause the timer
+
     setIsPlaying(false);
   };
 
   const handleResetTimer = () => {
+    // Reset the timer
+
     setIsPlaying(false);
     setIsWorkTime(true);
     setRemainingTime(workDuration);
   };
 
   const handleTimerComplete = () => {
+    // Handle timer completion
+
     setIsWorkTime(prev => !prev);
 
     if (isWorkTime) {
+       // If work time completed, start the break time
+
       setRemainingTime(breakDuration);
     } else {
+      // If break time completed, decrement the session count
+
       setSessionCount(prevCount => prevCount - 1);
 
       if (sessionCount === 1) {
+      // If all sessions completed, reset session count and start work time again
+
         setSessionCount(4);
         setRemainingTime(workDuration);
       } else {
+        // If sessions remaining, start work time again
+
         setRemainingTime(workDuration);
       }
     }
   };
 
   const formatTime = timeInSeconds => {
+    // Format time in minutes:seconds format
+
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
 
@@ -73,24 +95,34 @@ const Timer = () => {
   };
 
   const calculateProgress = () => {
+    // Calculate progress as a percentage
+
     const totalDuration = isWorkTime ? workDuration : breakDuration;
     return (remainingTime / totalDuration) * 100;
   };
 
   const handleSettingsPress = () => {
+    // Show settings modal
+
     setIsSettingsModalVisible(true);
   };
 
   const handleSettingsClose = () => {
+    // Close settings modal
+
     setIsSettingsModalVisible(false);
   };
 
   const handleWorkDurationChange = value => {
+    // Update work duration and remaining time if currently in work time
+
     setWorkDuration(value);
     setRemainingTime(value);
   };
 
   const handleBreakDurationChange = value => {
+     // Update break duration and remaining time if currently in break time
+
     setBreakDuration(value);
     if (!isWorkTime) {
       setRemainingTime(value);
@@ -98,11 +130,14 @@ const Timer = () => {
   };
 
   const handleSessionCountChange = value => {
+    // Update session count
+
     setSessionCount(value);
   };
 
   return (
     <View style={styles.container}>
+      /* Settings button */
       <TouchableOpacity
         style={styles.circularButton}
         onPress={handleSettingsPress}
@@ -110,11 +145,13 @@ const Timer = () => {
         <AntDesign name="setting" size={45} color="white" />
       </TouchableOpacity>
 
+      /* Modal display */
       <Modal visible={isSettingsModalVisible} animationType="slide" transparent={true}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Timer Settings</Text>
 
+            /* Work duration slider */
             <View style={styles.sliderContainer}>
               <Text style={styles.sliderLabel}>Work Duration: {workDuration / 60} minutes</Text>
               <Slider
@@ -129,6 +166,7 @@ const Timer = () => {
               />
             </View>
 
+            /* Break duration slider */
             <View style={styles.sliderContainer}>
               <Text style={styles.sliderLabel}>Break Duration: {breakDuration / 60} minutes</Text>
               <Slider
@@ -143,6 +181,7 @@ const Timer = () => {
               />
             </View>
 
+            /* Session count slider */
             <View style={styles.sliderContainer}>
               <Text style={styles.sliderLabel}>Session Count: {sessionCount}</Text>
               <Slider
@@ -156,6 +195,8 @@ const Timer = () => {
                 thumbTintColor={isWorkTime ? '#eb6956' : '#00bf63'}
               />
             </View>
+
+            /* Close button */
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={styles.closeButton}
@@ -168,6 +209,7 @@ const Timer = () => {
         </View>
       </Modal>
 
+      /* Timer display */
       <Svg width="200" height="200" style={styles.timerContainer}>
         <Circle
           cx="100"
@@ -190,6 +232,8 @@ const Timer = () => {
           transform="rotate(-90 100 100)"
         />
       </Svg>
+
+      /* Timer Play/Pause button */
       <TouchableOpacity
         style={styles.playPauseButton}
         onPress={isPlaying ? handlePauseTimer : handleStartTimer}
@@ -202,15 +246,18 @@ const Timer = () => {
           )}
         </View>
       </TouchableOpacity>
+
+      /* Remaining time display */
       <View style={styles.labelContainer}>
         <Text style={styles.timerLabel}>{formatTime(remainingTime)}</Text>
       </View>
 
+      /* Period label display */
       <View style={styles.periodContainer}>
         <Text style={styles.periodLabel}>{isWorkTime ? 'Work Time' : 'Break Time'}</Text>
       </View>
 
-
+      /* Reset button */
       <TouchableOpacity
         style={styles.resetButton}
         onPress={handleResetTimer}
@@ -236,7 +283,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   timerLabel: {
-
     fontSize: 24,
     fontWeight: 'bold',
     color: '#ddd'

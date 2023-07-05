@@ -14,6 +14,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
+        /* Define screens and their components */
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Timer" component={Timer} options={{ headerShown: false }}/>
         <Stack.Screen name="Task" component={Task} options={{ headerShown: false }}/>
