@@ -83,6 +83,8 @@ Toma-To Focus is released under the [MIT License](https://opensource.org/license
 
 ---
 
+## Links 🌟
+
 Thank you for choosing Toma-To Focus to boost your productivity and focus! 
 
 For more information and updates, please visit the [project's landing page](https://asiagrpr.wixsite.com/toma-to-focus), read more infos about the journey of creation in this [blog post](https://medium.com/@5634/boosting-productivity-and-focus-with-toma-to-focus-a-pomodoro-timer-app-9b5521c1e49b). 
