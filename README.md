@@ -33,13 +33,15 @@ To get started, simply launch the app and create a new note or to-do list. Use t
 ## Usage ⏱️
 Toma-To Focus provides the following features:
 
-- **Notes and To-Do Lists**: Easily manage your ideas and tasks by creating and saving notes and to-do lists.
-- **Visual Pomodoro Timer**: Stay focused on your work sessions with a visual timer that follows the Pomodoro technique. Customize the timer and its parameters to suit your preferences.
+- **Notes and To-Do Lists**: Easily manage your ideas and tasks by creating and saving notes and to-do lists, you can also transform a note into a To-do list and vice versa.
+- **Visual Pomodoro Timer**: Stay focused on your work sessions with a visual timer that follows the Pomodoro technique, each period is color-coded to help you manage your time without losing focus. Customize the timer and its parameters to suit your preferences.
 - **Android Compatibility**: The app is designed, for now, to be used on Android devices, including phones and tablets, with a responsive layout that adapts to different screen sizes.
 
-<figure class="video_container">
-  <iframe src="https://www.youtube.com/embed/G_ptF_4dcf0" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
+
+<div align="center">
+  <video src="https://github.com/AsiaGrpr/TomaTo-Focus/assets/113519051/bdbc6223-72da-49f7-bef4-0ff670ac1d05
+"/>
+</div>
 
 ## Storytime ✨
 Following my professional retraining and entry into the Holberton School, I discovered personal difficulties with my time management, concentration and attention span.
