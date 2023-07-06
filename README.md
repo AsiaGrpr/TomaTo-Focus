@@ -12,8 +12,7 @@ This app provides a simple and effective tool to boost your productivity by util
 ---
 <div align="center">
 
-**[INSTALLATION](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-installation)  - [USAGE](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-usage) - [STORYTIME](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-storytime) - [TECH STACK](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-tech-stack) - [CONTRIBUTING](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-contributing) 
-[RELATED PROJECTS](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-related-projects) - [LICENSING](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-licensing)**
+**[INSTALLATION](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-installation)  - [USAGE](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-usage) - [STORYTIME](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-storytime) - [TECH STACK](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-tech-stack) - [CONTRIBUTING](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-contributing) - [RELATED PROJECTS](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-related-projects) - [LICENSING](https://github.com/AsiaGrpr/TomaTo-Focus/blob/main/README.md##-licensing)**
 
 </div>
 
