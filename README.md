@@ -37,9 +37,9 @@ Toma-To Focus provides the following features:
 - **Visual Pomodoro Timer**: Stay focused on your work sessions with a visual timer that follows the Pomodoro technique. Customize the timer and its parameters to suit your preferences.
 - **Android Compatibility**: The app is designed, for now, to be used on Android devices, including phones and tablets, with a responsive layout that adapts to different screen sizes.
 
-<div align="center">
-<iframe width="560" height="420" src="https://www.youtube.com/embed/G_ptF_4dcf0" frameborder="0" allowfullscreen></iframe>
-</div>
+<figure class="video_container">
+  <iframe src="https://www.youtube.com/embed/G_ptF_4dcf0" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
 
 ## Storytime ✨
 Following my professional retraining and entry into the Holberton School, I discovered personal difficulties with my time management, concentration and attention span.
